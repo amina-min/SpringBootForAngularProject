@@ -7,6 +7,6 @@ import com.jee47.model.Employee;
 
 
 @Repository
-public interface EmployeeService extends CrudRepository<Employee, Long> {
+public interface EmployeeService extends CrudRepository<Employee, Integer> {
 
 }
