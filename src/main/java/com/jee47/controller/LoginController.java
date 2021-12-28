@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jee47.model.Employee;
 import com.jee47.model.UserModel;
+import com.jee47.service.UserService;
 
 
 
@@ -29,7 +31,7 @@ public class LoginController {
 	
 
 	@Autowired
-	private com.jee47.service.UserService userService;
+	private UserService userService;
 	SessionFactory sessionFactory;
 	
 	
@@ -38,23 +40,13 @@ public class LoginController {
 		return "Hello World";
 	}
 	
-	
-	
-	@PostMapping("/saveUser")
-	UserModel user(@RequestBody UserModel user) {
-	    return userService.save(user);
-	  }
-	
-	
-
-	
 	@PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserModel user) {
         List<UserModel> users = (List<UserModel>) userService.findAll();
         Map<String, Object> map = new HashMap<String, Object>();
         
         for (UserModel other : users) {
-            if (other.getUsername().equals(user.getUsername()) &&  other.getPassword().equals(user.getPassword())) {
+            if (other.getEmail().equals(user.getEmail()) &&  other.getPassword().equals(user.getPassword())) {
             	map.put("message", "Login Successful");
             	  map.put("status", "Success");
             	  map.put("data", other);
@@ -70,25 +62,6 @@ public class LoginController {
     }
     
 
-	
-	@GetMapping("/findAllUser")
-	public List<UserModel> findAll() {
-		List<UserModel> user = (List<UserModel>) userService.findAll();	
-		return user;	
-		
-	}
-	
-	
-	
-	
-	
-	
-	@DeleteMapping("/deleteUser/{id}")
-	private void delete(@PathVariable int id) {
-		userService.deleteById( (long) id);
-	}
-	
-	
 	
 	
 }

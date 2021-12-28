@@ -1,9 +1,13 @@
 package com.jee47.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.jee47.model.Employee;
 import com.jee47.service.EmployeeService;
@@ -31,35 +36,116 @@ public class AdminController {
 	
 	
 	
+	
+	
 	@PostMapping("/employee/saveEmployee")
-	Employee advertisingForm(@RequestBody Employee  employees) {
-	    return employeeservice.save(employees);
-	  }
+	public ResponseEntity<?> save(@RequestBody Employee entity) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			Employee employee = employeeservice.save(entity);
+			map.put("message", "Employee save successfully");
+			map.put("Data", employee);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee saved failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
+
+	
+	
+	
+	
+	@GetMapping("/employee/getOne/{id}")
+	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			Employee employee = employeeservice.findById(id).get();
+			map.put("message", "Employee get successfully");
+			map.put("Data", employee);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@GetMapping("/employee/getAll")
-	private List<Employee> findAll(){
-	 return  (List<Employee>) (employeeservice).findAll();
-		
+	public ResponseEntity<?> getEmployee() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<Employee> employee =(List<Employee>) employeeservice.findAll();
+			map.put("message", "Employee get successfully");
+			map.put("Data", employee);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee fetch failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
 	}
-	
-	@GetMapping("/employee/getOne/{id}")
-	private Employee findById(@PathVariable int id) {
-		
-		return employeeservice.findById((long) id).get();
-	}
+
 	
 	
 
-	@PutMapping("/employee/update")
-	private Employee advertisingFormU(@PathVariable int id,  @RequestBody Employee  employees) {
-		employees.setId(id);
-		return employeeservice.save(employees);
-	  }
 	
-	@DeleteMapping("/employee/delete/{id}")
-	private void delete(@PathVariable int id) {
-		employeeservice.deleteById((long) id);
+	@PostMapping("/employee/update")
+	public ResponseEntity<?> update(@RequestBody Employee entity) {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			Employee employee = employeeservice.save(entity);
+			map.put("message", "Employee updated successfully");
+			map.put("Data", employee);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee updated failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+
+	
+	
+	@GetMapping(value = "/employee/delete/{id}")
+	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
+		Map<String, Object> map = new HashMap<>();
+		Employee employee = employeeservice.findById(id).get();
+		try {
+			employeeservice.delete(employee);
+			map.put("message", "Employee deleted successfully");
+			map.put("Data", employee);
+			map.put("Status code", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee deletation failed");
+			map.put("Data", null);
+			map.put("Status code", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
 	}
 	
 }
