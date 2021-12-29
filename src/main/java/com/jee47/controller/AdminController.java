@@ -58,9 +58,6 @@ public class AdminController {
 	
 
 	
-	
-	
-	
 	@GetMapping("/employee/getOne/{id}")
 	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
