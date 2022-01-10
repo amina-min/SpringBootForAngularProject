@@ -39,8 +39,8 @@ public class EmployeeRatingModel {
 	private int motivateCoworkersToFinishScore;
 	private String leadershipComment;
 
-	private boolean isEligibleForPromotion;
-	private boolean isEligibleForTermination;
+	private String isEligibleForPromotion;
+	private String isEligibleForTermination;
 	private String extraComments;
 
 	public int getId() {
@@ -227,19 +227,21 @@ public class EmployeeRatingModel {
 		this.leadershipComment = leadershipComment;
 	}
 
-	public boolean isEligibleForPromotion() {
+	
+
+	public String getIsEligibleForPromotion() {
 		return isEligibleForPromotion;
 	}
 
-	public void setEligibleForPromotion(boolean isEligibleForPromotion) {
+	public void setIsEligibleForPromotion(String isEligibleForPromotion) {
 		this.isEligibleForPromotion = isEligibleForPromotion;
 	}
 
-	public boolean isEligibleForTermination() {
+	public String getIsEligibleForTermination() {
 		return isEligibleForTermination;
 	}
 
-	public void setEligibleForTermination(boolean isEligibleForTermination) {
+	public void setIsEligibleForTermination(String isEligibleForTermination) {
 		this.isEligibleForTermination = isEligibleForTermination;
 	}
 
