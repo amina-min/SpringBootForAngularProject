@@ -1,5 +1,5 @@
 package com.jee47.model;
-public class UserLoginModel {
+public class AdminLoginModel {
 
     private String email;
     private String password;
@@ -19,5 +19,9 @@ public class UserLoginModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
 }
+
+
+
+

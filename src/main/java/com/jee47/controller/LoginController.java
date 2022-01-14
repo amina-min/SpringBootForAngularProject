@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.jee47.model.UserModel;
-import com.jee47.service.UserService;
+import com.jee47.model.AdminModel;
+import com.jee47.service.AdminService;
 
 
 
@@ -30,7 +30,7 @@ public class LoginController {
 	
 
 	@Autowired
-	private UserService userService;
+	private AdminService userService;
 	
 	
 	
@@ -39,12 +39,12 @@ public class LoginController {
 		return "Hello World";
 	}
 	
-	@PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserModel user) {
-        List<UserModel> users = (List<UserModel>) userService.findAll();
+	@PostMapping("/adminlogin")
+    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody AdminModel user) {
+        List<AdminModel> users = (List<AdminModel>) userService.findAll();
         Map<String, Object> map = new HashMap<String, Object>();
         
-        for (UserModel other : users) {
+        for (AdminModel other : users) {
             if (other.getEmail().equals(user.getEmail()) &&  other.getPassword().equals(user.getPassword())) {
             	map.put("message", "Login Successful");
             	  map.put("status", "Success");

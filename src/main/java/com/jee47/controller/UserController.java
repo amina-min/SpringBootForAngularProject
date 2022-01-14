@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jee47.model.UserModel;
-import com.jee47.service.UserService;
+import com.jee47.model.AdminModel;
+import com.jee47.service.AdminService;
 
 
 
@@ -24,14 +24,14 @@ import com.jee47.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userService;
+	AdminService userService;
 
 	// (signup/update/save)
 	@PostMapping(value = "/signup")
-	public ResponseEntity<?> save(@RequestBody UserModel entity) {
+	public ResponseEntity<?> save(@RequestBody AdminModel entity) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			UserModel user = userService.save(entity);
+			AdminModel user = userService.save(entity);
 			map.put("message", "Data save successfully");
 			map.put("Data", user);
 			map.put("Status code", 200);
