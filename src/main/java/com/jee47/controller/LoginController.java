@@ -49,8 +49,7 @@ public class LoginController {
             	map.put("message", "Login Successful");
             	  map.put("status", "Success");
             	  map.put("data", other);
-            	  return ResponseEntity.ok(map);
-            	
+            	  return ResponseEntity.ok(map);            	
             }
         }
 
