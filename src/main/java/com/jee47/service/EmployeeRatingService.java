@@ -9,4 +9,5 @@ import com.jee47.model.EmployeeRatingModel;
 @Repository
 public interface EmployeeRatingService extends CrudRepository<EmployeeRatingModel, Integer> {
 
+	
 }
