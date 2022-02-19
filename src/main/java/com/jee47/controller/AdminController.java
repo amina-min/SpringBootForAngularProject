@@ -44,14 +44,14 @@ public class AdminController {
 		try {
 			Employee employee = employeeservice.save(entity);
 			map.put("message", "Employee save successfully");
-			map.put("Data", employee);
-			map.put("Status code", 200);
+			map.put("data", employee);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee saved failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -64,14 +64,14 @@ public class AdminController {
 		try {
 			Employee employee = employeeservice.findById(id).get();
 			map.put("message", "Employee get successfully");
-			map.put("Data", employee);
-			map.put("Status code", 200);
+			map.put("data", employee);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -90,14 +90,14 @@ public class AdminController {
 		try {
 			List<Employee> employee =(List<Employee>) employeeservice.findAll();
 			map.put("message", "Employee get successfully");
-			map.put("Data", employee);
-			map.put("Status code", 200);
+			map.put("data", employee);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee fetch failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -112,14 +112,14 @@ public class AdminController {
 		try {
 			Employee employee = employeeservice.save(entity);
 			map.put("message", "Employee updated successfully");
-			map.put("Data", employee);
-			map.put("Status code", 200);
+			map.put("data", employee);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee updated failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
@@ -133,14 +133,14 @@ public class AdminController {
 		try {
 			employeeservice.delete(employee);
 			map.put("message", "Employee deleted successfully");
-			map.put("Data", employee);
-			map.put("Status code", 200);
+			map.put("data", employee);
+			map.put("statusCode", 200);
 			return ResponseEntity.ok(map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee deletation failed");
-			map.put("Data", null);
-			map.put("Status code", 400);
+			map.put("data", null);
+			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
