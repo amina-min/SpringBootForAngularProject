@@ -127,12 +127,19 @@ public class AdminController {
 	public ResponseEntity<?> getInfo() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			long count = employeeservice.count();
+			long empCount = employeeservice.count();
 			TotalInfo info = new TotalInfo();
-			info.setTotalEmployeeCount(count);
+			info.setTotalEmployeeCount(empCount);
+			info.setTotalFeedbackCount(ratingService.count());
+			info.setNoFeedbackCount(empCount - ratingService.count());
+			
+			if(info.getNoFeedbackCount()<0) info.setNoFeedbackCount(0);
+						
 			map.put("message", "Employee get successfully");
 			map.put("statusCode", 200);
+			map.put("data", info);
 			return ResponseEntity.ok(map);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("message", "Employee fetch failed");
