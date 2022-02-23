@@ -1,6 +1,5 @@
 package com.jee47.controller;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,27 +16,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.jee47.model.Employee;
+import com.jee47.model.TotalInfo;
+import com.jee47.service.EmployeeRatingService;
 import com.jee47.service.EmployeeService;
-
-
-
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-
-
 
 public class AdminController {
 
 	@Autowired
 	private EmployeeService employeeservice;
-	
-	
-	
-	
-	
+
+	@Autowired
+	private EmployeeRatingService ratingService;
+
 	@PostMapping("/employee/saveEmployee")
 	public ResponseEntity<?> save(@RequestBody Employee entity) {
 		Map<String, Object> map = new HashMap<>();
@@ -55,9 +49,7 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
-	
 
-	
 	@GetMapping("/employee/getOne/{id}")
 	public ResponseEntity<?> findById(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
@@ -75,20 +67,12 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@GetMapping("/employee/getAll")
 	public ResponseEntity<?> getEmployee() {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			List<Employee> employee =(List<Employee>) employeeservice.findAll();
+			List<Employee> employee = (List<Employee>) employeeservice.findAll();
 			map.put("message", "Employee get successfully");
 			map.put("data", employee);
 			map.put("statusCode", 200);
@@ -102,10 +86,6 @@ public class AdminController {
 		}
 	}
 
-	
-	
-
-	
 	@PostMapping("/employee/update")
 	public ResponseEntity<?> update(@RequestBody Employee entity) {
 		Map<String, Object> map = new HashMap<>();
@@ -124,8 +104,6 @@ public class AdminController {
 		}
 	}
 
-	
-	
 	@GetMapping(value = "/employee/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 		Map<String, Object> map = new HashMap<>();
@@ -144,5 +122,24 @@ public class AdminController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
 	}
-	
+
+	@GetMapping("/employee/totalinfo")
+	public ResponseEntity<?> getInfo() {
+		Map<String, Object> map = new HashMap<>();
+		try {
+			long count = employeeservice.count();
+			TotalInfo info = new TotalInfo();
+			info.setTotalEmployeeCount(count);
+			map.put("message", "Employee get successfully");
+			map.put("statusCode", 200);
+			return ResponseEntity.ok(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("message", "Employee fetch failed");
+			map.put("data", null);
+			map.put("statusCode", 400);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
+		}
+	}
+
 }

@@ -30,6 +30,7 @@ public class EmployeeController {
 		@PostMapping("/employeelogin")
 	    public ResponseEntity<Map<String, Object>> loginUser(@RequestBody EmployeeModel employee) {
 	        List<EmployeeModel> emp = (List<EmployeeModel>) empService.findAll();
+	       
 	        Map<String, Object> map = new HashMap<String, Object>();
 	        
 	        for (EmployeeModel other : emp) {
