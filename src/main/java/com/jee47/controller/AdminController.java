@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jee47.model.Employee;
+import com.jee47.model.Location;
 import com.jee47.model.TotalInfo;
 import com.jee47.service.EmployeeRatingService;
 import com.jee47.service.EmployeeService;
+import com.jee47.service.LocationRepo;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -31,6 +33,8 @@ public class AdminController {
 
 	@Autowired
 	private EmployeeRatingService ratingService;
+	
+	
 
 	@PostMapping("/employee/saveEmployee")
 	public ResponseEntity<?> save(@RequestBody Employee entity) {
@@ -147,6 +151,8 @@ public class AdminController {
 			map.put("statusCode", 400);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(map);
 		}
-	}
+	}	
+	
+	
 
 }
