@@ -19,7 +19,6 @@ import com.jee47.service.LocationRepo;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-
 public class LocationController {
 	@Autowired
 	private LocationRepo repo;

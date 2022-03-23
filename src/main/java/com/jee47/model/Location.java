@@ -13,39 +13,31 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	int empId;
-	String latitude;
-	String longitude;
-
+	double latitude;
+	double longitude;
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public int getEmpId() {
 		return empId;
 	}
-
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
-
-	public String getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
-
-	public void setLatitude(String latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
-	public String getLongitude() {
+	public double getLongitude() {
 		return longitude;
 	}
-
-	public void setLongitude(String longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-
+ 
 }
